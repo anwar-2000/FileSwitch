@@ -9,6 +9,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'HomePage/index.css' %}">
+        {% block cssFiles %} {% endblock %}
     </head>
     <body>
             <nav>
@@ -24,7 +25,7 @@
                                 <li><a href="">IMG TO PDF</a></li>
                                 <li><a href="">IMG TO SKETCH</a></li>
                                 <li><a href="" id="register">REGISTER</a></li>
-                                <li><a href="" id="login">LOGIN</a></li>
+                                <li><a href="/login" id="login">LOGIN</a></li>
 
                             </ul>
                         </div>

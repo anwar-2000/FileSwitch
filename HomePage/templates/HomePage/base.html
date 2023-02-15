@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'HomePage/index.css' %}">
+    </head>
+    <body>
+            <nav>
+
+                <div class="container">
+                        <div class="logo">
+                            <h2>FILE SWITCH</h2>
+                        </div>
+                        <div class="tools">
+                            <ul>
+
+                                <li><a href="">PDF TO IMG</a></li>
+                                <li><a href="">IMG TO PDF</a></li>
+                                <li><a href="">IMG TO SKETCH</a></li>
+                                <li><a href="" id="register">REGISTER</a></li>
+                                <li><a href="" id="login">LOGIN</a></li>
+
+                            </ul>
+                        </div>
+
+                </div>
+
+            </nav>
+
+            <section>
+
+                {% block content %}
+
+                {% endblock %}
+
+            </section>
+
+
+
+        <script src="" async defer></script>
+    </body>
+</html>

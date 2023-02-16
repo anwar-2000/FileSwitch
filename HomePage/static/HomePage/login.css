@@ -62,6 +62,18 @@
 }
 
 #forgot__password{
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
+}
+#forgot__password a {
+  text-decoration: overline;
+  color: green;
+}
+
+#message{
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 0.5rem 0rem;
+    text-align: center;
 }

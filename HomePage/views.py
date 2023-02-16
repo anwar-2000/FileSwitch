@@ -1,66 +1,61 @@
-from django.shortcuts import render 
-from django.urls import reverse
+from django.shortcuts import render ,redirect
+from django.urls import reverse 
 from django.http import HttpResponseRedirect 
 
-from django.contrib.auth import login , authenticate
+
+from django.contrib import messages
+from django.contrib.auth import login , authenticate , logout
 
 from django.views.generic import View
 # Create your views here.
-from .forms import LoginForm , RegisterForm
+from .forms import RegisterForm
 
 
 class IndexView(View):
     def get(self,request):
         return render(request,"HomePage/index.html")
     
+    #logout
+def logout(request):
+    logout(request)
+    return redirect('loginPage')
+
+
 class LoginView(View):
 
-
     def get(self,request):
-        context = {"loginform" :  LoginForm() }
-        return render(request,"HomePage/login.html",context)
-    
+        return render(request,"HomePage/login.html")
 
     def post(self,request):
-        loginform = LoginForm(request.POST)
-        if loginform.is_valid():
-            email = loginform.cleaned_data['email']
-            password = loginform.cleaned_data['password']
-            user = authenticate(request,username=email,password=password)
-            if user is not None:
-                #i'll add session logic here
-                login(request,user)
-                return HttpResponseRedirect(reverse('homepage'))
-            else:
-                context = {"loginform" : loginform}
-                return render(request,"HomePage/login.html",context)
-        else :
-            context = {"loginform" :  LoginForm() }
-            return render(request,"HomePage/login.html",context)
+           username = request.POST['username']
+           password = request.POST['password']
+           print(username,password)#works
+           user = authenticate(request,username=username,password=password)
+           print('user : ',user)#none -> it works now
+           
+           if user is not None:
+               login(request,user)
+               return redirect('homepage')
+           else:
+                messages.info(request,'Email or Password are incorrect')
+                return render(request,"HomePage/login.html") 
+       
 
 class RegisterView(View):
-
+    
     def get(self,request):
         context = {"registerform" :  RegisterForm() }
         return render(request,"HomePage/signUp.html",context)
     
 
     def post(self,request):
-        registerform = RegisterForm(request.POST)
-        if registerform.is_valid():
-            #email = registerform.cleaned_data['email']
-            #password = registerform.cleaned_data['password']
-            new_user = registerform.save(commit=False)
-            new_user.email= registerform.cleaned_data['email']
-            new_user.set_password(registerform.cleaned_data['password'])
-            new_user.save()
-
-            user = authenticate(request,username=new_user.email,password=registerform.cleaned_data['password'])
-            if user is not None:
-                #i'll add session logic here
-                login(request,user)
-                return HttpResponseRedirect(reverse('homepage'))
-        else:
-            context ={ "registerform" : registerform}
-            return render(request,"HomePage/signUp.html",context)
+       form = RegisterForm(request.POST)
+       if form.is_valid():
+           form.save()
+           user = form.cleaned_data.get('username')
+           messages.success(request,'Account succesfully created for ' + user)
+           return HttpResponseRedirect(reverse('loginPage'))
+       else:
+           context = {"registerform" : form}
+           return render(request,"HomePage/signUp.html",context) 
 

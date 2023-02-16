@@ -18,13 +18,16 @@
                 <div class="form-control">
                     <form method="POST" action="{% url 'loginPage' %}">
                         {% csrf_token %}
-                        {% for field in loginform  %}
-                        {{field.label_tag}}
-                        {{field}}
-                        {% endfor %}
+                        <label for="username">Your Username :</label><input id="username" type="text" name="username" />
+                        <label for="password">Your Password :</label><input id="password" type="password" name="password" />
+                        
                        
                    <center> <button type="submit">Login</button></center>
                 </div>
+
+                {% for message in messages %}
+                    <p id="message">{{message}}</p>
+                {% endfor %}
                 <p id="forgot__password"><a href="">i forgot my password :/ </a></p>
             </div>
         </div>

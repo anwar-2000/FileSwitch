@@ -1,11 +1,11 @@
 {% extends 'HomePage/base.html' %}
 {% load static %}
 {% block title %}
-    LOGIN
+    Register
 {% endblock  %}
 
 {% block cssFiles %}
-<link rel="stylesheet" href="{% static 'HomePage/login.css' %}">
+<link rel="stylesheet" href="{% static 'HomePage/register.css' %}">
 {% endblock%}
 
 {% block content %}
@@ -13,19 +13,18 @@
         <div class="login__container">
             <div class="card">
                 <div class="head">
-                    <h3>LOGIN</h3>
+                    <h3>SIGN UP</h3>
                 </div>
                 <div class="form-control">
-                    <form method="POST" action="{% url 'loginPage' %}">
+                    <form method="POST" action="{% url 'registerPage' %}">
                         {% csrf_token %}
-                        {% for field in loginform  %}
+                        {% for field in registerform  %}
                         {{field.label_tag}}
                         {{field}}
                         {% endfor %}
                        
-                   <center> <button type="submit">Login</button></center>
+                   <center><button type="submit">SIGN UP</button></center>
                 </div>
-                <p id="forgot__password"><a href="">i forgot my password :/ </a></p>
             </div>
         </div>
 

@@ -29,9 +29,9 @@ class LoginView(View):
     def post(self,request):
            username = request.POST['username']
            password = request.POST['password']
-           print(username,password)#works
+           #print(username,password)#works
            user = authenticate(request,username=username,password=password)
-           print('user : ',user)#none -> it works now
+           #print('user : ',user)#none -> it works now
            
            if user is not None:
                login(request,user)

@@ -1,9 +1,58 @@
 {% extends 'HomePage/base.html' %}
+{% load static %}
+
 
 {% block title %}
     FILESWITCH
 {% endblock  %}
 
 {% block content %}
-        <h1>FILE SWITCH</h1>
+        <section class="container__section">
+
+            <div><center><h1 id="fileSwitch">FILE SWITCH</h1></center> </div>
+
+                <main>
+                    <div class="images">
+                            <img src="{% static 'HomePage/images/xls.png' %}" alt="" id="xls" />
+                            <img src="{% static 'HomePage/images/ppt.png' %}" alt="" id="ppt" />
+                            <img src="{% static 'HomePage/images/pdf.png' %}" alt="" id="pdf" onmouseover="addHoverClass()" onmouseleave="removeHoverClass()" />    
+                            <img src="{% static 'HomePage/images/html.png' %}" alt="" id="html" />
+                            <img src="{% static 'HomePage/images/picture.png' %}" alt="" id="picture" />
+                            <img src="{% static 'HomePage/images/doc.png' %}" alt="" id="doc" />
+                    </div>
+                </main>
+
+        </section>
 {% endblock %}
+
+{% block scripts %}
+<script>
+        function addHoverClass(){
+            console.log('hello')
+            var html =  document.getElementById('html');
+            var ppt =  document.getElementById('ppt');
+            var doc =  document.getElementById('doc');
+            var xls =  document.getElementById('xls');
+            var picture =  document.getElementById('picture');
+
+            html.classList.add('move-right');
+            ppt.classList.add('move-left');
+            doc.classList.add('move-up');
+            xls.classList.add('move-up-right');
+            picture.classList.add('move-down');
+        }
+        function removeHoverClass(){
+            var html =  document.getElementById('html');
+            var ppt =  document.getElementById('ppt');
+            var doc =  document.getElementById('doc');
+            var xls =  document.getElementById('xls');
+            var picture =  document.getElementById('picture');
+
+            html.classList.remove('move-right');
+            ppt.classList.remove('move-left');
+            doc.classList.remove('move-up');
+            xls.classList.remove('move-up-right');
+            picture.classList.remove('move-down');
+        }
+</script>
+{% endblock  %}
